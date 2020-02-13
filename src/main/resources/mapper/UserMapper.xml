@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.huang.shiro.dao.UserMapper">
+
+    <resultMap type="com.huang.shiro.pojo.User" id="resultUserMap">
+        <result property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="pwd" column="pwd"/>
+    </resultMap>
+
+
+    <select id="getUserById" resultType="com.huang.shiro.pojo.User" parameterType="int">
+        SELECT *
+        FROM user
+        WHERE id = #{id}
+    </select>
+
+    <select id="getUserByUsername" resultType="com.huang.shiro.pojo.User" parameterType="String">
+        SELECT *
+        FROM user
+        WHERE name = #{username}
+    </select>
+
+
+</mapper>
+

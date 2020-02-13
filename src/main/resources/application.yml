@@ -1,0 +1,49 @@
+#film:
+#  title: ${TITLE}
+#  description: ${DESCRIPTION}
+#  film_id: ${FILM_ID}
+
+#server:
+##  port: 9999
+
+#spring:
+#  datasource:
+#    username: ${MYSQL_ROOT_NAME}
+#    password: ${MYSQL_ROOT_PASSWORD}
+#    url: ${IP}
+#    driver‐class‐name: com.mysql.cj.jdbc.Driver
+
+
+spring:
+  datasource:
+    username: root2
+    password: Mysql219378!
+    url: jdbc:mysql://101.132.165.234:3306/neteasetask?useSSL=false&serverTimezone=Asia/Shanghai
+    driver‐class‐name: com.mysql.cj.jdbc.Driver
+
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    #   配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+
+#spring:
+#  datasource:
+#    url: jdbc:mysql://101.132.165.234:3306/read_data?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+#    username: root2
+#    password: Mysql219378!
+#    driver-class-name: com.mysql.jdbc.Driver
+
+

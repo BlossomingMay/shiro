@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.huang.shiro.dao.OrderMapper">
+
+    <resultMap type="com.huang.shiro.pojo.Order" id="resultOrderMap">
+        <result property="id" column="id"/>
+        <result property="goodsId" column="goods_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="payTime" column="pay_time"/>
+        <result property="price" column="price"/>
+        <result property="goodsNumber" column="goods_number"/>
+    </resultMap>
+
+
+    <select id="getAllOrderById" resultMap="resultOrderMap" parameterType="int">
+		SELECT *
+		FROM goods_order
+		WHERE user_id = #{id}
+    </select>
+
+    <select id="getOrderById" resultMap="resultOrderMap" parameterType="int">
+		SELECT *
+		FROM goods_order
+		WHERE id = #{id}
+    </select>
+
+    <select id="getBuyedGoodsId" resultType="Integer" parameterType="int">
+		SELECT DISTINCT goods_id
+		FROM goods_order
+		WHERE user_id = #{userId}
+    </select>
+
+
+    <select id="getSaledGoodsId" resultType="Integer">
+		SELECT DISTINCT goods_id
+		FROM goods_order
+    </select>
+
+    <insert id="insertOrder" parameterType="com.huang.shiro.pojo.Order">
+    INSERT INTO goods_order
+    (id, goods_id,user_id,price, pay_time,goods_number)
+    VALUES( #{id}, #{goodsId}, #{userId}, #{price},#{payTime},#{goodsNumber})
+    </insert>
+
+
+</mapper>
+

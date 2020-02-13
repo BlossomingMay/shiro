@@ -1,0 +1,225 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.thymeleaf.org/thymeleaf-extras-shiro">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/public.css}"/>
+
+<style>
+    .page-body .tabs .tab-header {
+        display: flex;
+    }
+
+    .page-body .tabs .tab-header .cate {
+        width: 8em;
+        font-size: 18px;
+        line-height: 40px;
+        text-align: center;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        border-bottom: 1px solid #ccc;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    .page-body .tabs .tab-header .active {
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        border: 1px solid #ccc;
+        border-bottom: none;
+    }
+
+    .page-body .tabs .tab-header .space {
+        flex: 1;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .page-body .tabs .tab-content {
+        display: none;
+        padding: 20px 0;
+        font-size: 0;
+    }
+
+    .page-body .tabs .content-active {
+        display: block;
+    }
+
+    .page-body .tabs .tab-content .book {
+        display: inline-block;
+        position: relative;
+        vertical-align: bottom;
+        width: 22%;
+        margin-right: 4%;
+        overflow: hidden;
+        background-color: #fff;
+        border-radius: 4px;
+        box-shadow: 1px 1px 6px #e5e5e5;
+        transition: .2s;
+        cursor: pointer;
+    }
+
+    .page-body .tabs .tab-content .book:hover {
+        transform: scale(1.1);
+    }
+
+    .page-body .tabs .tab-content .book:nth-child(4n+0) {
+        margin-right: 0;
+    }
+
+    .page-body .tabs .tab-content .book .book-status {
+        position: absolute;
+        padding: 20px 20px 0 20px;
+        left: -30px;
+        top: -10px;
+        font-size: 12px;
+        color: #fff;
+        background-color: #999;
+        transform: rotate(-45deg);
+    }
+
+    .page-body .tabs .tab-content .book .book-img {
+        width: 100%;
+        height: 16vw;
+    }
+
+    .page-body .tabs .tab-content .book .book-name {
+        padding: 0 20px;
+        font-size: 16px;
+        line-height: 30px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .page-body .tabs .tab-content .book .book-price {
+        padding: 0 20px;
+        padding-bottom: 10px;
+        font-size: 0;
+    }
+
+    .page-body .tabs .tab-content .book .book-price .unit {
+        display: inline-block;
+        vertical-align: bottom;
+        color: #ccc;
+        font-size: 14px;
+    }
+
+    .page-body .tabs .tab-content .book .book-price .number {
+        display: inline-block;
+        vertical-align: bottom;
+        color: red;
+        font-size: 20px;
+        padding-left: 4px;
+    }
+</style>
+
+<header class="page-header">
+    <div class="user" th:if="${session.loginUser==null}">
+        <a th:href="@{/login}">登陆</a>
+    </div>
+
+    <div class="user" th:if="${session.loginUser!=null}">
+        <span>你好！</span>
+        <span th:text="${session.loginUser.name}"></span>
+        <a href="/logout">[退出]</a>
+    </div>
+
+    <div class="actions">
+        <a th:href="'/'">首页</a>
+        <span th:if="${session.loginUser!=null}">
+            <span th:if="${session.loginUser.role=='buyer'}">
+                <a th:href="'/order/'+${session.loginUser.id}">历史订单</a>
+                <a th:href="'/shoppingcar/'+${session.loginUser.id}">购物车</a>
+            </span>
+
+            <span th:if="${session.loginUser.role=='seller'}">
+                <a th:href="'/goods/add'">发布</a>
+            </span>
+        </span>
+
+    </div>
+
+</header>
+<body>
+<!-- 页面头部 -->
+<!-- 页面内容 -->
+<div class="page-body">
+    <!-- tab -->
+    <div class="tabs">
+        <!-- tab标签 -->
+        <div class="tab-header">
+            <span class="cate active">所有内容</span>
+            <span class="space"></span>
+        </div>
+        <!-- tab显示内容 -->
+        <!-- 所有 -->
+        <div class="tab-content content-active">
+
+            <tr th:each="goods : ${goodsList}">
+                <a th:href="'/goodsDetail/'+${goods.id}">
+                    <div class="book">
+                        <span th:if="${session.loginUser!=null}">
+                            <span th:if="${session.loginUser.role=='buyer'}">
+                                <span th:each="buyed : ${buyedGoods}">
+                                        <span th:if="${buyed} == ${goods.id}">
+                                            <div class="book-status">已购买</div>
+                                        </span>
+                                </span>
+                            </span>
+
+                            <span th:if="${session.loginUser.role=='seller'}">
+                                <span th:each="saled : ${saledGoods}">
+                                        <span th:if="${saled} == ${goods.id}">
+                                            <div class="book-status">已出售</div>
+                                        </span>
+                                </span>
+                            </span>
+                        </span>
+                        <img class="book-img" th:src="@{${goods.img}}" alt=""/>
+                        <p class="book-name" th:text="${goods.name}"></p>
+                        <p class="book-price">
+                            <span class="unit">￥</span>
+                            <span class="number" th:text="${goods.price}"></span>
+                        </p>
+                    </div>
+                </a>
+            </tr>
+        </div>
+
+
+    </div>
+</div>
+</div>
+</body>
+
+<script>
+    // tab头部
+    let tabHeader = document.getElementsByClassName('cate');
+    // tab内容
+    let tabContent = document.getElementsByClassName('tab-content');
+
+    // 移除选中状态
+    function removeTabClass() {
+        for (let i = 0; i < tabHeader.length; i++) {
+            tabHeader[i].classList.remove('active');
+            tabContent[i].classList.remove('content-active');
+        }
+    };
+    // 添加选中状态
+    for (let i = 0; i < tabHeader.length; i++) {
+        tabHeader[i].addEventListener("click", () = > {
+            removeTabClass();
+        tabHeader[i].classList.add('active');
+        tabContent[i].classList.add('content-active');
+    })
+    }
+    ;
+
+</script>
+
+
+</html>

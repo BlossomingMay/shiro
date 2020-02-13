@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.huang.shiro.dao.GoodsMapper">
+
+    <resultMap type="com.huang.shiro.pojo.Goods" id="resultGoodsMap">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="img" column="img"/>
+        <result property="price" column="price"/>
+        <result property="summary" column="summary"/>
+
+    </resultMap>
+
+
+    <select id="getGoodsById" resultMap="resultGoodsMap" parameterType="int">
+        SELECT *
+        FROM goods
+        WHERE id = #{id}
+    </select>
+
+    <insert id="addGoods" parameterType="com.huang.shiro.pojo.Goods">
+    INSERT INTO goods(name, img,price,summary,stock)
+    VALUES( #{name}, #{img}, #{price}, #{summary}, #{stock})
+    </insert>
+
+
+</mapper>

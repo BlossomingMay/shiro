@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.thymeleaf.org/thymeleaf-extras-shiro">
+<!-- jquery -->
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<!-- bootstrap -->
+<script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<!-- jquery-validator -->
+<script type="text/javascript" th:src="@{/jquery-validation/jquery.validate.min.js}"></script>
+<script type="text/javascript" th:src="@{/jquery-validation/localization/messages_zh.min.js}"></script>
+<!-- layer -->
+<script type="text/javascript" th:src="@{/layer/layer.js}"></script>
+<!-- md5.js -->
+<script type="text/javascript" th:src="@{/js/md5.min.js}"></script>
+<!-- common.js -->
+<script type="text/javascript" th:src="@{/js/common.js}"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/public.css}"/>
+
+</head>
+<body>
+<header class="page-header">
+    <div class="user" th:if="${session.loginUser==null}">
+        <a th:href="@{/login}">登陆</a>
+    </div>
+
+    <div class="user" th:if="${session.loginUser!=null}">
+        <span>你好！</span>
+        <span th:text="${session.loginUser.name}"></span>
+        <a href="/logout">[退出]</a>
+    </div>
+
+    <div class="actions">
+        <a th:href="'/'">首页</a>
+        <span th:if="${session.loginUser!=null}">
+            <span th:if="${session.loginUser.role=='buyer'}">
+                <a th:href="'/order/'+${session.loginUser.id}">历史订单</a>
+                <a th:href="'/shoppingcar/'+${session.loginUser.id}">购物车</a>
+            </span>
+
+            <span th:if="${session.loginUser.role=='seller'}">
+                <a th:href="'/goods/add'">发布</a>
+            </span>
+        </span>
+
+    </div>
+
+</header>
+
+<h3>已购买内容</h3>
+<table class="table">
+    <tr>
+        <td>商品名称</td>
+        <td>商品数量</td>
+        <td>商品价格</td>
+    </tr>
+    <tr th:each="sc : ${shoppingCarVo}">
+        <td th:text="${sc.goodsName}"></td>
+        <td th:text="${sc.shoppingCar.goodsNumber}"></td>
+        <td th:text="${sc.price}"></td>
+    </tr>
+</table>
+<br/>
+
+<button type="button" onclick="pay()">付款</button>
+
+</body>
+<script>
+    function pay() {
+        $.ajax({
+            url: "/pay",
+            type: "POST",
+            data: {},
+            success: function (data) {
+                layer.closeAll();
+                if (data == "0") {
+                    layer.msg("成功");
+                } else {
+                    layer.msg("失败");
+                }
+            },
+            error: function () {
+                layer.closeAll();
+            }
+        });
+    }
+</script>
+</html>
