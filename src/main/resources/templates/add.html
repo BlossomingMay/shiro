@@ -1,18 +1,17 @@
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:shiro="http://www.thymeleaf.org/thymeleaf-extras-shiro">
+      xmlns:shiro = "http://www.thymeleaf.org/thymeleaf-extras-shiro">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/public.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/public.css}" />
 <style>
-    .page-body .tabs .tab-header {
+    .page-body .tabs .tab-header{
         display: flex;
     }
-
-    .page-body .tabs .tab-header .cate {
+    .page-body .tabs .tab-header .cate{
         width: 8em;
         font-size: 18px;
         line-height: 40px;
@@ -24,30 +23,25 @@
         cursor: pointer;
         box-sizing: border-box;
     }
-
-    .page-body .tabs .tab-header .active {
+    .page-body .tabs .tab-header .active{
         border-top-left-radius: 4px;
         border-top-right-radius: 4px;
         border: 1px solid #ccc;
         border-bottom: none;
     }
-
-    .page-body .tabs .tab-header .space {
+    .page-body .tabs .tab-header .space{
         flex: 1;
         border-bottom: 1px solid #ccc;
     }
-
-    .page-body .tabs .tab-content {
+    .page-body .tabs .tab-content{
         display: none;
         padding: 20px 0;
         font-size: 0;
     }
-
-    .page-body .tabs .content-active {
+    .page-body .tabs .content-active{
         display: block;
     }
-
-    .page-body .tabs .tab-content .book {
+    .page-body .tabs .tab-content .book{
         display: inline-block;
         position: relative;
         vertical-align: bottom;
@@ -60,16 +54,13 @@
         transition: .2s;
         cursor: pointer;
     }
-
-    .page-body .tabs .tab-content .book:hover {
+    .page-body .tabs .tab-content .book:hover{
         transform: scale(1.1);
     }
-
-    .page-body .tabs .tab-content .book:nth-child(4n+0) {
+    .page-body .tabs .tab-content .book:nth-child(4n+0){
         margin-right: 0;
     }
-
-    .page-body .tabs .tab-content .book .book-status {
+    .page-body .tabs .tab-content .book .book-status{
         position: absolute;
         padding: 20px 20px 0 20px;
         left: -30px;
@@ -79,35 +70,30 @@
         background-color: #999;
         transform: rotate(-45deg);
     }
-
-    .page-body .tabs .tab-content .book .book-img {
+    .page-body .tabs .tab-content .book .book-img{
         width: 100%;
         height: 16vw;
     }
-
-    .page-body .tabs .tab-content .book .book-name {
+    .page-body .tabs .tab-content .book .book-name{
         padding: 0 20px;
-        font-size: 16px;
+        font-size:16px;
         line-height: 30px;
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
     }
-
-    .page-body .tabs .tab-content .book .book-price {
+    .page-body .tabs .tab-content .book .book-price{
         padding: 0 20px;
         padding-bottom: 10px;
         font-size: 0;
     }
-
-    .page-body .tabs .tab-content .book .book-price .unit {
+    .page-body .tabs .tab-content .book .book-price .unit{
         display: inline-block;
         vertical-align: bottom;
         color: #ccc;
         font-size: 14px;
     }
-
-    .page-body .tabs .tab-content .book .book-price .number {
+    .page-body .tabs .tab-content .book .book-price .number{
         display: inline-block;
         vertical-align: bottom;
         color: red;
@@ -115,34 +101,30 @@
         padding-left: 4px;
     }
 
-    .form .form-title {
+    .form .form-title{
         line-height: 30px;
         border-bottom: 1px solid #ccc;
     }
 
-    .form .info-input-box {
+    .form .info-input-box{
         position: relative;
         padding-right: 30%;
         padding-top: 20px;
     }
-
-    .form .input-box {
+    .form .input-box{
         display: flex;
-        padding: 10px 0;
+        padding: 10px 0 ;
     }
-
     .form .input-box input,
-    .form .input-box .check-box {
+    .form .input-box .check-box{
         flex: 1;
     }
-
-    .form .input-box label {
+    .form .input-box label{
         padding-right: 10px;
         font-size: 16px;
         line-height: 28px;
     }
-
-    .form .input-box input {
+    .form .input-box input{
         padding: 0 10px;
         font-size: 16px;
         line-height: 28px;
@@ -152,23 +134,19 @@
         border: 1px solid #ccc;
         background-color: #fff;
     }
-
-    #imgAddress {
+    #imgAddress{
         flex: 1;
     }
-
-    #file {
+    #file{
         padding: 0;
         border: none;
         background: none;
     }
-
-    .form .info-input-box .input-box .check-box {
+    .form .info-input-box .input-box .check-box{
         font-size: 16px;
         line-height: 28px;
     }
-
-    .form .info-input-box .input-box .check-box .action .radioIcon {
+    .form .info-input-box .input-box .check-box .action .radioIcon{
         display: inline-block;
         vertical-align: middle;
         position: relative;
@@ -180,34 +158,29 @@
         border-radius: 50%;
         cursor: pointer;
     }
-
-    .form .info-input-box .input-box .check-box .action .active {
+    .form .info-input-box .input-box .check-box .action .active{
         background-color: #19a2ff;
     }
-
-    .form .info-input-box .input-box .check-box .action .active::after {
+    .form .info-input-box .input-box .check-box .action .active::after{
         content: '';
         position: absolute;
-        top: calc(50% - 3px);
-        left: calc(50% - 3px);
+        top: calc( 50% - 3px );
+        left: calc( 50% - 3px );
         height: 6px;
         width: 6px;
         background-color: #fff;
         border-radius: 50%;
     }
-
-    .files-input {
+    .files-input{
         display: none;
     }
-
-    .input-active {
+    .input-active{
         display: block;
     }
-
-    #bookimg {
+    #bookimg{
         position: absolute;
         right: 20px;
-        top: calc(50% - 90px);
+        top: calc( 50% - 90px );
         right: 0;
         background-color: #fff;
         border: 1px solid #ccc;
@@ -215,8 +188,7 @@
         width: 180px;
         height: 180px;
     }
-
-    #infotext {
+    #infotext{
         flex: 1;
         padding: 10px;
         font-size: 14px;
@@ -229,8 +201,7 @@
         resize: none;
 
     }
-
-    .form .submit-btn {
+    .form .submit-btn{
         margin-left: 50px;
         padding: 0 10px;
         line-height: 30px;
@@ -244,21 +215,21 @@
     }
 </style>
 <body>
-<!-- 页面头部 -->
-<header class="page-header">
-    <div class="user" th:if="${session.loginUser==null}">
-        <a th:href="@{/login}">登陆</a>
-    </div>
+    <!-- 页面头部 -->
+    <header class="page-header">
+        <div class="user" th:if="${session.loginUser==null}">
+            <a th:href="@{/login}">登陆</a>
+        </div>
 
-    <div class="user" th:if="${session.loginUser!=null}">
-        <span>你好！</span>
-        <span th:text="${session.loginUser.name}"></span>
-        <a href="/logout">[退出]</a>
-    </div>
+        <div class="user" th:if="${session.loginUser!=null}">
+            <span>你好！</span>
+            <span th:text="${session.loginUser.name}"></span>
+            <a href="/logout">[退出]</a>
+        </div>
 
-    <div class="actions">
-        <a th:href="'/'">首页</a>
-        <span th:if="${session.loginUser!=null}">
+        <div class="actions">
+            <a th:href="'/'">首页</a>
+            <span th:if="${session.loginUser!=null}">
             <span th:if="${session.loginUser.role=='buyer'}">
                 <a th:href="'/order/'+${session.loginUser.id}">历史订单</a>
                 <a th:href="'/shoppingcar/'+${session.loginUser.id}">购物车</a>
@@ -269,131 +240,129 @@
             </span>
         </span>
 
+        </div>
+
+    </header>
+    <!-- 页面内容 -->
+    <div class="page-body">
+
+        <form class="form" action="/addGoods" method="POST" enctype="multipart/form-data">
+
+            <p class="form-title">内容发布</p>
+            <a th:text="${msg}"></a>
+            <div class="info-input-box">
+                <div class="input-box">
+                    <label for="title" >标题:</label>
+                    <input type="text" name="title" id="title" placeholder="2-80字符" minlength="2" maxlength="80">
+                </div>
+                <div class="input-box">
+                    <label for="abstract">摘要:</label>
+                    <input type="text" name="abstract" id="abstract" placeholder="2-140字符" minlength="2" maxlength="140">
+                </div>
+                <div class="input-box">
+                    <label for="picture">图片:</label>
+                    <div class="check-box">
+                        <span class="action"><i class="radioIcon active" onclick="changeWay(0)"></i>图片地址</span>
+                        <span class="action"><i class="radioIcon" onclick="changeWay(1)"></i>本地上传</span>
+                    </div>
+                </div>
+                <div class="show-box  files-input input-active">
+                    <div class="input-box">
+                        <label for="imgAddress">地址:</label>
+                        <input type="text" id="imgAddress" name="imgAddress" placeholder="图片地址">
+                    </div>
+                </div>
+                <div class="show-box  files-input">
+                    <div class="input-box">
+                        <label for="file">文件:</label>
+                        <input type="file" id="file" name="file">
+                    </div>
+                </div>
+
+                <img class="book-img" id="bookimg" src="" alt="">
+            </div>
+
+
+            <div class="input-box">
+                <label for="infotext">正文:</label>
+                <textarea name="infotext" id="infotext"  rows="20" minlength="2" maxlength="1000" ></textarea>
+            </div>
+
+
+            <div class="input-box">
+                <label for="price">价格:</label>
+                <input name="price" id="price">
+                <label>元</label>
+            </div>
+
+            <button type="submit" class="submit-btn">发布</button>
+        </form>
+
+
     </div>
-
-</header>
-<!-- 页面内容 -->
-<div class="page-body">
-
-    <form class="form" action="/addGoods" method="POST" enctype="multipart/form-data">
-
-        <p class="form-title">内容发布</p>
-        <a th:text="${msg}"></a>
-        <div class="info-input-box">
-            <div class="input-box">
-                <label for="title">标题:</label>
-                <input type="text" name="title" id="title" placeholder="2-80字符" minlength="2" maxlength="80">
-            </div>
-            <div class="input-box">
-                <label for="abstract">摘要:</label>
-                <input type="text" name="abstract" id="abstract" placeholder="2-140字符" minlength="2" maxlength="140">
-            </div>
-            <div class="input-box">
-                <label for="picture">图片:</label>
-                <div class="check-box">
-                    <span class="action"><i class="radioIcon active" onclick="changeWay(0)"></i>图片地址</span>
-                    <span class="action"><i class="radioIcon" onclick="changeWay(1)"></i>本地上传</span>
-                </div>
-            </div>
-            <div class="show-box  files-input input-active">
-                <div class="input-box">
-                    <label for="imgAddress">地址:</label>
-                    <input type="text" id="imgAddress" name="imgAddress" placeholder="图片地址">
-                </div>
-            </div>
-            <div class="show-box  files-input">
-                <div class="input-box">
-                    <label for="file">文件:</label>
-                    <input type="file" id="file" name="file">
-                </div>
-            </div>
-
-            <img class="book-img" id="bookimg" src="" alt="">
-        </div>
-
-
-        <div class="input-box">
-            <label for="infotext">正文:</label>
-            <textarea name="infotext" id="infotext" rows="20" minlength="2" maxlength="1000"></textarea>
-        </div>
-
-
-        <div class="input-box">
-            <label for="price">价格:</label>
-            <input name="price" id="price">
-            <label>元</label>
-        </div>
-
-        <button type="submit" class="submit-btn">发布</button>
-    </form>
-
-
-</div>
 </body>
 <script>
     let radios = document.getElementsByClassName('radioIcon');
     let filesInput = document.getElementsByClassName('files-input');
 
     //改变上传方式
-    function changeWay(num) {
-        if (num == 0) {
-            if (radios[1].classList.length > 1) {
+    function changeWay(num){
+        if(num == 0){
+            if(radios[1].classList.length > 1){
                 radios[1].classList.remove('active')
                 filesInput[1].classList.remove('input-active')
                 document.getElementById('file').value = ''
             }
-            if (radios[0].classList.length = 1) {
+            if(radios[0].classList.length = 1){
                 radios[0].classList.add('active')
                 filesInput[0].classList.add('input-active')
             }
-        } else {
+        }else{
             console.log()
-            if (radios[0].classList.length > 1) {
+            if(radios[0].classList.length > 1){
                 radios[0].classList.remove('active')
                 filesInput[0].classList.remove('input-active')
                 document.getElementById('imgAddress').value = ''
             }
-            if (radios[1].classList.length = 1) {
+            if(radios[1].classList.length = 1){
                 radios[1].classList.add('active')
                 filesInput[1].classList.add('input-active')
             }
         }
     };
 
-    document.getElementById('imgAddress').addEventListener('change', (e) = > {
-        changeImg(e,0
-    )
+    document.getElementById('imgAddress').addEventListener('change',(e)=>{
+        changeImg(e,0)
     })
-    document.getElementById('file').addEventListener('change', (e) = > {
-        changeImg(e,1
-    )
+    document.getElementById('file').addEventListener('change',(e)=>{
+        changeImg(e,1)
     })
 
     //获取上传文件本地路径
     function getObjectURL(file) {
         var url = null;
-        if (window.createObjectURL != undefined) {
-            url = window.createObjectURL(file);
-        } else if (window.URL != undefined) { // mozilla(firefox)
-            url = window.URL.createObjectURL(file);
-        } else if (window.webkitURL != undefined) { // webkit or chrome
-            url = window.webkitURL.createObjectURL(file);
+        if (window.createObjectURL!=undefined) {
+        url = window.createObjectURL(file) ;
+        } else if (window.URL!=undefined) { // mozilla(firefox)
+        url = window.URL.createObjectURL(file) ;
+        } else if (window.webkitURL!=undefined) { // webkit or chrome
+        url = window.webkitURL.createObjectURL(file) ;
         }
-        return url;
+        return url ;
     }
 
 
     let img = document.getElementById('bookimg');
 
     //显示上传图片
-    function changeImg(e, num) {
+    function changeImg(e,num){
         console.log(e)
-        if (num == 0) {
+        if(num == 0){
             img.src = e.target.value
-        } else {
+        }else{
 
             let src = getObjectURL(e.target.files[0]);
-            img.src = src;
+            img.src=src;
         }
     }
 </script>
